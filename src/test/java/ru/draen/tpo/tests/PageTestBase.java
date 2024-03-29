@@ -1,37 +1,41 @@
-package ru.draen.tpo;
+package ru.draen.tpo.tests;
 
 
-import java.io.IOException;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 import java.util.stream.Stream;
 
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.Capabilities;
+import org.openqa.selenium.WebDriver;
 
+import ru.draen.tpo.CustomParameterResolver;
+import ru.draen.tpo.SuiteConfiguration;
 import ru.stqa.selenium.factory.WebDriverPool;
 
 /**
  * Base class for all the JUnit-based test classes
  */
-public abstract class JUnitTestBase {
+@ExtendWith(CustomParameterResolver.class)
+public abstract class PageTestBase {
   protected static String baseUrl;
   protected static List<Capabilities> capabilities;
 
   @ParameterizedTest(name = "{0}")
-  @MethodSource("allImplementations")
+  @MethodSource("allDrivers")
   @Retention(RetentionPolicy.RUNTIME)
-  protected @interface TestAllImplementations {
+  protected @interface TestWithAllDrivers {
   }
 
-  static Stream<Arguments> allImplementations() {
-    System.out.println("there");
+  static Stream<Arguments> allDrivers() {
     return capabilities.stream().map(caps -> Arguments.of(WebDriverPool.DEFAULT.getDriver(caps)));
   }
 
@@ -41,4 +45,19 @@ public abstract class JUnitTestBase {
     baseUrl = config.getProperty("site.url");
     capabilities = config.getCapabilities();
   };
+
+  @BeforeEach
+  public void prepareContext(WebDriver driver) {
+    driver.manage().window().maximize();
+    driver.get(baseUrl);
+    driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
+    preparePages(driver);
+  }
+  protected abstract void preparePages(WebDriver driver);
+
+  @AfterEach
+  public void quitDriver(WebDriver driver) {
+    driver.quit();
+  }
+
 }
