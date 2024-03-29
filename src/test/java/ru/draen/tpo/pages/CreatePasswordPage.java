@@ -29,6 +29,10 @@ public class CreatePasswordPage extends Page {
         super(driver);
     }
 
+    public static CreatePasswordPage initialize(WebDriver driver) {
+        return Page.initialize(driver, "//form[@class=\"nw-register\"]//button[@type=\"submit\"]", CreatePasswordPage.class);
+    }
+
     public void tryCreatePassword(String password) {
         tryCreatePassword(password, password);
     }

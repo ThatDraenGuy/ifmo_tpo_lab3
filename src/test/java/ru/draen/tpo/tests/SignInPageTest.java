@@ -40,8 +40,8 @@ public class SignInPageTest extends PageTestBase {
 
     @Override
     protected void preparePages(WebDriver driver) {
-        HomePage homePage = PageFactory.initElements(driver, HomePage.class);
+        HomePage homePage = HomePage.initialize(driver);
         homePage.goToSignIn();
-        signInPage = PageFactory.initElements(driver, SignInPage.class);
+        signInPage = SignInPage.initialize(driver);
     }
 }

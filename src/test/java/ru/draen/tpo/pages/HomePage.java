@@ -22,6 +22,10 @@ public class HomePage extends Page {
     super(webDriver);
   }
 
+  public static HomePage initialize(WebDriver driver) {
+    return Page.initialize(driver, "//span[@data-testid=\"header-logo\"]", HomePage.class);
+  }
+
   public void goToSignIn() {
     signInButton.click();
   }

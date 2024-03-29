@@ -5,8 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.PageFactory;
-
 import ru.draen.tpo.Constants;
 import ru.draen.tpo.pages.CreatePasswordPage;
 import ru.draen.tpo.pages.HomePage;
@@ -58,11 +56,11 @@ public class CreatePasswordPageTest extends PageTestBase {
 
     @Override
     protected void preparePages(WebDriver driver) {
-        HomePage homePage = PageFactory.initElements(driver, HomePage.class);
+        HomePage homePage = HomePage.initialize(driver);
         homePage.goToSignIn();
-        SignInPage signInPage = PageFactory.initElements(driver, SignInPage.class);
+        SignInPage signInPage = SignInPage.initialize(driver);
         signInPage.tryLogin(Constants.NEW_EMAIL);
-        createPasswordPage = PageFactory.initElements(driver, CreatePasswordPage.class);
+        createPasswordPage = CreatePasswordPage.initialize(driver);
     }
 
 }

@@ -34,11 +34,11 @@ public class EnterPasswordPageTest extends PageTestBase {
 
     @Override
     protected void preparePages(WebDriver driver) {
-        HomePage homePage = PageFactory.initElements(driver, HomePage.class);
+        HomePage homePage = HomePage.initialize(driver);
         homePage.goToSignIn();
-        SignInPage signInPage = PageFactory.initElements(driver, SignInPage.class);
+        SignInPage signInPage = SignInPage.initialize(driver);
         signInPage.tryLogin(Constants.EXISTING_EMAIL);
-        enterPasswordPage = PageFactory.initElements(driver, EnterPasswordPage.class);
+        enterPasswordPage = EnterPasswordPage.initialize(driver);
     }
 
 }

@@ -22,6 +22,10 @@ public class EnterPasswordPage extends Page {
         super(driver);
     }
 
+    public static EnterPasswordPage initialize(WebDriver driver) {
+        return Page.initialize(driver, "//form[@class=\"nw-signin\"]//input[@type=\"password\"]", EnterPasswordPage.class);
+    }
+
     public void tryLogin(String password) {
         passwordField.sendKeys(password);
         signInButton.click();

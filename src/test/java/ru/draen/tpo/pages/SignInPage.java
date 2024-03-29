@@ -19,6 +19,10 @@ public class SignInPage extends Page {
     super(webDriver);
   }
 
+  public static SignInPage initialize(WebDriver driver) {
+    return Page.initialize(driver, "//form[@class=\"nw-signin\"]//button[@type=\"submit\"]", SignInPage.class);
+  }
+
   public void tryLogin(String email) {
     emailField.sendKeys(email);
     submitButton.click();
