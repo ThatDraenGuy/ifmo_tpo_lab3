@@ -18,12 +18,22 @@ public class HomePage extends Page {
   @FindBy(how = How.XPATH, using = "//*[@data-testid=\"header-profile\"]")
   public WebElement profileButton;
 
+
+  @FindBy(how = How.XPATH, using = "//form[@method=\"GET\"]//input[@role=\"combobox\"]")
+  public WebElement searchPlaceField;
+
+  @FindBy(how = How.XPATH, using = "//form[@method=\"GET\"]//button[@type=\"submit\"]")
+  public WebElement searchButton;
+
+  @FindBy(how = How.XPATH, using = "//form[@method=\"GET\"]//div[@data-testid=\"searchbox-alert\"]/div")
+  public WebElement searchAlert;
+
   public HomePage(WebDriver webDriver) {
     super(webDriver);
   }
 
   public static HomePage initialize(WebDriver driver) {
-    return Page.initialize(driver, "//span[@data-testid=\"header-logo\"]", HomePage.class);
+    return Page.initialize(driver, "//form[@method=\"GET\"]//button[@type=\"submit\"]", HomePage.class);
   }
 
   public void goToSignIn() {
