@@ -10,4 +10,6 @@ public class Constants {
     public static final String PASSWORD_NO_UPPERCASE = "aaaaaaaaa1";
     public static final String PASSWORD_NO_LOWERCASE = "AAAAAAAAA1";
     public static final String PASSWORD_PASSING = "AAAAAAAAa1";
+    public static final String FORBIDDEN_CITY = "Moscow";
+    public static final String ALLOWED_CITY = "New York";
 }

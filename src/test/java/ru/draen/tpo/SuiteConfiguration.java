@@ -35,16 +35,18 @@ public class SuiteConfiguration {
     for (var capabilitiesFile : capabilitiesFiles) {
       Properties capsProps = new Properties();
       capsProps.load(SuiteConfiguration.class.getResourceAsStream(capabilitiesFile));
-  
+
       DesiredCapabilities capabilities = new DesiredCapabilities();
       for (String name : capsProps.stringPropertyNames()) {
         String value = capsProps.getProperty(name);
-        if (value.toLowerCase().equals("true") || value.toLowerCase().equals("false")) {
+        if (value.equalsIgnoreCase("true") || value.equalsIgnoreCase("false")) {
           capabilities.setCapability(name, Boolean.valueOf(value));
         } else if (value.startsWith("file:")) {
           capabilities.setCapability(name, new File(".", value.substring(5)).getCanonicalFile().getAbsolutePath());
         } else if (name.equals("driverKey")) {
           System.setProperty(value, properties.getProperty(value));
+        } else if (name.equalsIgnoreCase("webdriver.firefox.bin")) {
+          System.setProperty(name, value);
         } else {
           capabilities.setCapability(name, value);
         }

@@ -3,12 +3,15 @@ package ru.draen.tpo.tests;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import org.junit.jupiter.params.provider.Arguments;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import ru.draen.tpo.Constants;
 import ru.draen.tpo.pages.CreatePasswordPage;
 import ru.draen.tpo.pages.HomePage;
 import ru.draen.tpo.pages.SignInPage;
+
+import java.util.stream.Stream;
 
 public class CreatePasswordPageTest extends PageTestBase {
     private CreatePasswordPage createPasswordPage;

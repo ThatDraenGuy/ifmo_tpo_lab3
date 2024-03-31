@@ -44,7 +44,7 @@ public abstract class PageTestBase {
     SuiteConfiguration config = new SuiteConfiguration();
     baseUrl = config.getProperty("site.url");
     capabilities = config.getCapabilities();
-  };
+  }
 
   @BeforeEach
   public void prepareContext(WebDriver driver) {
