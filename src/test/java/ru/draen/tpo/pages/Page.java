@@ -1,8 +1,8 @@
 package ru.draen.tpo.pages;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.StaleElementReferenceException;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.*;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.How;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -23,6 +23,12 @@ public abstract class Page {
     this.driver = driver;
   }
 
+  @FindBy(how = How.XPATH, using = "//button[@id=\"onetrust-accept-btn-handler\"]")
+  public WebElement cookiesAccept;
+
+  @FindBy(how = How.XPATH, using = "//button[@aria-label=\"Dismiss sign-in info.\"]")
+  public WebElement signInInfoClose;
+
   protected static<T> T initialize(WebDriver driver, String checkXpath, Class<T> clazz) {
     Wait<WebDriver> wait = new WebDriverWait(driver, 5).ignoring(StaleElementReferenceException.class);
         wait.until(d -> {
@@ -36,4 +42,33 @@ public abstract class Page {
     return driver.getTitle();
   }
 
+  public void acceptCookies() {
+      try {
+          cookiesAccept.click();
+          new WebDriverWait(driver, 5).until(d -> {
+              try {
+                  return !cookiesAccept.isDisplayed();
+              } catch (NoSuchElementException | StaleElementReferenceException e) {
+                  return true;
+              }
+          });
+      } catch (NoSuchElementException e) {
+          System.out.println("No cookies accept button!");
+      }
+  }
+
+  public void closeSignIn() {
+      try {
+          signInInfoClose.click();
+          new WebDriverWait(driver, 5).until(d -> {
+              try {
+                  return !signInInfoClose.isDisplayed();
+              } catch (NoSuchElementException | StaleElementReferenceException e) {
+                  return true;
+              }
+          });
+      } catch (NoSuchElementException e) {
+          System.out.println("No sign in button!");
+      }
+  }
 }
