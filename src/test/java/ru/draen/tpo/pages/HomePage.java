@@ -6,7 +6,6 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.time.Duration;
 
 /**
  * Sample page
@@ -62,6 +61,8 @@ public class HomePage extends Page {
                 return firstAutoCompleteResult.isDisplayed();
               });
       firstAutoCompleteResult.click();
+    } else {
+      searchPlaceField.sendKeys(searchTerm);
     }
     searchButton.click();
   }

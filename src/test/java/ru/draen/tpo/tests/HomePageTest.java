@@ -26,7 +26,7 @@ public class HomePageTest extends PageTestBase {
         SearchResultPage resultPage = SearchResultPage.initialize(driver);
         assertTrue(resultPage.getTitle().contains("Hotels in " + Constants.FORBIDDEN_CITY));
         assertTrue(resultPage.russiaBlackoutBanner.isDisplayed());
-        assertEquals(resultPage.russiaBlackoutBanner.getText(), "It's not possible to make a reservation for this region through Booking.com at this time.");
+        assertEquals("It's not possible to make a reservation for this region through Booking.com at this time.", resultPage.russiaBlackoutBanner.getText());
     }
 
     @TestWithAllDrivers
@@ -38,7 +38,6 @@ public class HomePageTest extends PageTestBase {
             resultPage.russiaBlackoutBanner.isDisplayed();
         });
         String resultText = resultPage.resultsHeader.getText();
-        System.out.println("ABABA " + resultText);
         Pattern p = Pattern.compile(Constants.ALLOWED_CITY +": ([0-9,]+) properties found");
         Matcher m = p.matcher(resultText);
         assertTrue(m.matches());

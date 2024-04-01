@@ -3,14 +3,11 @@ package ru.draen.tpo.tests;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import java.sql.Driver;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 
-import org.openqa.selenium.support.ui.Wait;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import ru.draen.tpo.Constants;
 import ru.draen.tpo.pages.EnterPasswordPage;
 import ru.draen.tpo.pages.HomePage;
